@@ -9,6 +9,7 @@ const pathCharacter = '*';
 class Field {
     constructor(twodArr){
         this.arr = twodArr;
+        this.playerLocation = [2,2];
     }
 
     print() {
@@ -16,6 +17,40 @@ class Field {
            console.log(this.arr[i].join(" "));
 
         }
+       }
+
+       isOutOfBoundries(playerLoc , inputStep){
+           switch(inputStep) {
+
+
+                case w:
+                    this.playerLocation[1] = this.playerLocation + 1;
+                    break;
+
+                case s:
+                    this.playerLocation[1] = this.playerLocation -1;
+                    break;
+
+                case a:
+                    this.playerLocation[0] = this.playerLocation -1;
+                    break;
+
+                case d:
+                    this.playerLocation[0] = this.playerLocation +1;
+
+           }
+
+           if(this.playerLocation[0] < 0 || this.playerLocation[0] > 2 || this.playerLocation[1] < 0 || this.playerLocation[1] > 2){
+               return false;
+           }
+
+           return true;
+       }
+
+       updateStep(userStep) {
+        
+
+
        }
 }
 
@@ -59,9 +94,12 @@ myField.generateField();
 while(gameOn){
 
 
-  
+  // recive the next step of user
   let nextStep = prompt('please enter your next step..');
+
+// updating the field according to user input
   myField.updateStep(nextStep);
+
 
 
 
