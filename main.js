@@ -79,11 +79,13 @@ class Field {
         }
        }
        //TODO - 2 function isHole
-       isHole(location){
-
+       isHole(){
+         console.log("got into isHole");
+        if(this.arr[this.userLocation[0]][this.userLocation[1]] == hole)
+        return true;
+        return false;
        }
 
-         // TODO - 1
        isOutOfBoundries(location,axis){
          if(axis == 'x'){
            if(location < 0 || location >this.arr[0].length-1) {
@@ -116,7 +118,6 @@ class Field {
        updateStep(userStep) {
         switch(userStep) {
         case 'w' :
-            console.log('this is w');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]--;
 
@@ -125,14 +126,17 @@ class Field {
               this.loseGame();
               break;
             }
+            //checking if user hit a hole
+            if(this.isHole() == true){
+              this.loseGame();
+              break;
+            }
+            
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log('updating array');
-            console.log(this.userLocation[0] );
-            console.log(this.userLocation[1])
+           
         break;
 
         case 's':
-            console.log('this is s');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]++;
             //checking if not out of boundies
@@ -141,9 +145,7 @@ class Field {
               break;
             }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log('updating array');
-            console.log(this.userLocation[0] );
-            console.log(this.userLocation[1])
+            
                         break;
 
         case 'a':
@@ -155,14 +157,13 @@ class Field {
               this.loseGame();
               break;
             }
+            
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log('updating array');
             console.log(this.userLocation[0] );
             console.log(this.userLocation[1])  
                      break;
 
         case 'd':
-            console.log('this is d');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]++;
             //checking if not out of boundies
@@ -171,7 +172,6 @@ class Field {
               break;
             }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log('updating array');
             console.log(this.userLocation[0] );
             console.log(this.userLocation[1])
 
@@ -210,6 +210,8 @@ let winStatus = false;
 //runs the game while player hasnt failed neither won
 let field1 = new Field(generateField(5,5));
 console.log(field1.gameOn);
+
+
 while(field1.gameOn){
     field1.print()
 
@@ -218,12 +220,7 @@ while(field1.gameOn){
 
 // updating the field according to user input
   field1.updateStep(nextStep);
-
-
-
-
- 
-
+//checking if user hit a hole
 
 
 }
