@@ -5,7 +5,7 @@ const hole = 'O';
 const fieldCharacter = '░';
 const pathCharacter = '*';
 
-//TODO - 1
+
 function generateField(x,y) {
     
     //raising the value of x,y since arr index starting from 0
@@ -64,7 +64,8 @@ class Field {
     constructor(arr){
         this.arr = arr;
         this.userLocation = [0,0]
-        
+          //player haswnt won or failed
+        this.gameOn = true;
     }
 
     
@@ -77,36 +78,35 @@ class Field {
 
         }
        }
+       //TODO - 2 function isHole
+       isHole(location){
 
-
-         // TODO 
-       isOutOfBoundries(playerLoc , inputStep){
-           switch(inputStep) {
-
-
-                case w:
-                    this.playerLocation[1] = this.playerLocation + 1;
-                    break;
-
-                case s:
-                    this.playerLocation[1] = this.playerLocation -1;
-                    break;
-
-                case a:
-                    this.playerLocation[0] = this.playerLocation -1;
-                    break;
-
-                case d:
-                    this.playerLocation[0] = this.playerLocation +1;
-
-           }
-
-           if(this.playerLocation[0] < 0 || this.playerLocation[0] > 2 || this.playerLocation[1] < 0 || this.playerLocation[1] > 2){
-               return false;
-           }
-
-           return true;
        }
+
+         // TODO - 1
+       isOutOfBoundries(location,axis){
+         if(axis == 'x'){
+           if(location < 0 || location >this.arr[0].length-1) {
+              return false;
+           }
+         }
+
+         if(axis == 'y'){
+          if(location < 0 || location >this.arr.length-1) {
+             return false;
+          }
+        }
+
+        return true;
+         
+       }
+
+      loseGame() {
+        field1.gameOn = false;
+        console.log("Were sorry but you losed.. :(");
+      }
+
+
        /**
         * @param userStep - direction user choosed
         * @param userlocation - current location of user
@@ -119,6 +119,12 @@ class Field {
             console.log('this is w');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]--;
+
+            //checking if not out of boundries
+            if(this.isOutOfBoundries(this.userLocation[0], 'x') == false){
+              this.loseGame();
+              break;
+            }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             console.log('updating array');
             console.log(this.userLocation[0] );
@@ -129,6 +135,11 @@ class Field {
             console.log('this is s');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]++;
+            //checking if not out of boundies
+            if(this.isOutOfBoundries(this.userLocation[0], 'x') == false){
+              this.loseGame();
+              break;
+            }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             console.log('updating array');
             console.log(this.userLocation[0] );
@@ -139,6 +150,11 @@ class Field {
             console.log('this is a');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]--;
+            //checking if not out of boundies
+            if(this.isOutOfBoundries(this.userLocation[1], 'y') == false){
+              this.loseGame();
+              break;
+            }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             console.log('updating array');
             console.log(this.userLocation[0] );
@@ -149,6 +165,11 @@ class Field {
             console.log('this is d');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]++;
+            //checking if not out of boundies
+            if(this.isOutOfBoundries(this.userLocation[1], 'y') == false){
+              this.loseGame();
+              break;
+            }
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             console.log('updating array');
             console.log(this.userLocation[0] );
@@ -174,8 +195,7 @@ class Field {
   console.log('D - right');
 
 
-  //player haswnt won or failed
-let gameOn = true;
+
 
 // winStatus is false till player win
 let winStatus = false;
@@ -189,8 +209,8 @@ let winStatus = false;
 
 //runs the game while player hasnt failed neither won
 let field1 = new Field(generateField(5,5));
-
-while(gameOn){
+console.log(field1.gameOn);
+while(field1.gameOn){
     field1.print()
 
   // recive the next step of user
