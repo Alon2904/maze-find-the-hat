@@ -63,6 +63,7 @@ function generateField(x,y) {
 class Field {
     constructor(arr){
         this.arr = arr;
+        this.userLocation = [0,0]
         
     }
 
@@ -76,7 +77,9 @@ class Field {
 
         }
        }
-         // TODO - 2 adjust to new random field size
+
+
+         // TODO 
        isOutOfBoundries(playerLoc , inputStep){
            switch(inputStep) {
 
@@ -104,24 +107,60 @@ class Field {
 
            return true;
        }
-
+       /**
+        * @param userStep - direction user choosed
+        * @param userlocation - current location of user
+        * 
+        * @return false if user lose / win if user still on game
+        */
        updateStep(userStep) {
-        
+        switch(userStep) {
+        case 'w' :
+            console.log('this is w');
+            this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
+            this.userLocation[0]--;
+            this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
+            console.log('updating array');
+            console.log(this.userLocation[0] );
+            console.log(this.userLocation[1])
+        break;
 
+        case 's':
+            console.log('this is s');
+            this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
+            this.userLocation[0]++;
+            this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
+            console.log('updating array');
+            console.log(this.userLocation[0] );
+            console.log(this.userLocation[1])
+                        break;
+
+        case 'a':
+            console.log('this is a');
+            this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
+            this.userLocation[1]--;
+            this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
+            console.log('updating array');
+            console.log(this.userLocation[0] );
+            console.log(this.userLocation[1])  
+                     break;
+
+        case 'd':
+            console.log('this is d');
+            this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
+            this.userLocation[1]++;
+            this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
+            console.log('updating array');
+            console.log(this.userLocation[0] );
+            console.log(this.userLocation[1])
 
        }
 }
-
-let field1 = new Field(generateField(5,5));
-field1.print();
+}
 
 
-/** 
-const myField = new Field([
-    ['*', '░', 'O'],
-    ['░', 'O', '░'],
-    ['░', '^', '░'],
-  ]);
+
+
 
 
   console.log('Welcome to amazing maze game!');
@@ -141,8 +180,6 @@ let gameOn = true;
 // winStatus is false till player win
 let winStatus = false;
 
-//TODO get a number represent the location of the hat 
-let hatLocation = myField.getHatLocation;
 
 //setting up a new field for the upcoming game
  //let myField = new Field();
@@ -151,27 +188,25 @@ let hatLocation = myField.getHatLocation;
 //myField.generateField();
 
 //runs the game while player hasnt failed neither won
+let field1 = new Field(generateField(5,5));
+
 while(gameOn){
-    myField.print()
+    field1.print()
 
   // recive the next step of user
   let nextStep = prompt('please enter your next step..');
 
 // updating the field according to user input
-  myField.updateStep(nextStep);
+  field1.updateStep(nextStep);
 
 
 
 
  
 
-if(winStatus) {
-    gameOn = false;
 
-}
 
 }
 
 
 
-*/
