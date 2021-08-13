@@ -5,20 +5,78 @@ const hole = 'O';
 const fieldCharacter = '░';
 const pathCharacter = '*';
 
+//TODO - 1
+function generateField(x,y) {
+    
+    //raising the value of x,y since arr index starting from 0
+   x++;
+   y++;
 
-class Field {
-    constructor(twodArr){
-        this.arr = twodArr;
-        this.playerLocation = [2,2];
+    let arr = []; // returned value
+    let randomHatLocation; // holds the index number for hat location
+    let twoThirds; //holds number represent 30% of cells number. will be used to set holes
+
+    //generating array full of ░
+    for (let i = 0; i < y; i++) {
+      let subarray = [];
+  
+      for (let j = 0; j < x; j++) {
+        subarray.push(fieldCharacter);
+      }
+  
+      arr.push(subarray);
     }
 
+     //setting holes in random places
+     twoThirds = (x * y) /4;
+     
+
+
+     for (let i = 0; i< twoThirds;i++){
+     randomX = Math.floor(Math.random() * x); 
+     randomY = Math.floor(Math.random() * y);
+
+   
+
+     arr[randomX][randomY] = hole;
+     }
+
+    // initializing player
+    arr[0][0] = pathCharacter;
+
+
+    //setting random location for hat 
+    randomHatLocation = Math.floor(Math.random() * x);
+    arr[x-1][randomHatLocation] = hat;
+
+   
+  
+    return arr;
+  };
+        
+    
+    
+   
+
+
+
+class Field {
+    constructor(arr){
+        this.arr = arr;
+        
+    }
+
+    
+           
+
     print() {
+        console.log('getting into print function');
        for(let i in this.arr) {
            console.log(this.arr[i].join(" "));
 
         }
        }
-
+         // TODO - 2 adjust to new random field size
        isOutOfBoundries(playerLoc , inputStep){
            switch(inputStep) {
 
@@ -54,9 +112,11 @@ class Field {
        }
 }
 
+let field1 = new Field(generateField(5,5));
+field1.print();
 
 
-
+/** 
 const myField = new Field([
     ['*', '░', 'O'],
     ['░', 'O', '░'],
@@ -81,18 +141,18 @@ let gameOn = true;
 // winStatus is false till player win
 let winStatus = false;
 
-//get a number represent the location of the hat 
+//TODO get a number represent the location of the hat 
 let hatLocation = myField.getHatLocation;
 
 //setting up a new field for the upcoming game
-let myField = new Field();
+ //let myField = new Field();
 
 //generating a random field
-myField.generateField();
+//myField.generateField();
 
 //runs the game while player hasnt failed neither won
 while(gameOn){
-
+    myField.print()
 
   // recive the next step of user
   let nextStep = prompt('please enter your next step..');
@@ -103,7 +163,7 @@ while(gameOn){
 
 
 
- myField.print()
+ 
 
 if(winStatus) {
     gameOn = false;
@@ -114,3 +174,4 @@ if(winStatus) {
 
 
 
+*/
