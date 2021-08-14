@@ -72,7 +72,6 @@ class Field {
            
 
     print() {
-        console.log('getting into print function');
        for(let i in this.arr) {
            console.log(this.arr[i].join(" "));
 
@@ -80,7 +79,6 @@ class Field {
        }
        //TODO - 2 function isHole
        isHole(){
-         console.log("got into isHole");
         if(this.arr[this.userLocation[0]][this.userLocation[1]] == hole)
         return true;
         return false;
@@ -90,6 +88,7 @@ class Field {
        isOutOfBoundries(location,axis){
          if(axis == 'x'){
            if(location < 0 || location >this.arr[0].length-1) {
+
               return false;
            }
          }
@@ -97,6 +96,7 @@ class Field {
          if(axis == 'y'){
           if(location < 0 || location >this.arr.length-1) {
              return false;
+             
           }
         }
 
@@ -104,9 +104,23 @@ class Field {
          
        }
 
+       isHat() {
+        if(this.arr[this.userLocation[0]][this.userLocation[1]] == hat){
+        return true;}
+
+        return false;
+        
+       }
+
+      //printing lose game massage and setting gameOn to false
       loseGame() {
         field1.gameOn = false;
         console.log("Were sorry but you losed.. :(");
+      }
+      //printing winning massage and setting gameOn to false
+      winGame() {
+        console.log("You found the hat!!! Congratz");
+        this.gameOn = false;
       }
       /**
        * getting the next location the user wants to move to and checks wether there
@@ -128,6 +142,13 @@ class Field {
           this.loseGame();
           
         }
+        // Cheking if user found the hat
+        if(this.isHat() == true) {
+        this.winGame();
+        }
+
+
+
       }
 
 
@@ -159,7 +180,6 @@ class Field {
                         break;
 
         case 'a':
-            console.log('this is a');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]--;
               this.manageCases(1,'y');
@@ -174,8 +194,7 @@ class Field {
               this.manageCases(1,'y');
            
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log(this.userLocation[0] );
-            console.log(this.userLocation[1])
+            
 
        }
 }
@@ -211,7 +230,6 @@ let winStatus = false;
 
 //runs the game while player hasnt failed neither won
 let field1 = new Field(generateField(5,5));
-console.log(field1.gameOn);
 
 
 while(field1.gameOn){
