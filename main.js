@@ -86,6 +86,7 @@ class Field {
         return false;
        }
 
+
        isOutOfBoundries(location,axis){
          if(axis == 'x'){
            if(location < 0 || location >this.arr[0].length-1) {
@@ -107,6 +108,27 @@ class Field {
         field1.gameOn = false;
         console.log("Were sorry but you losed.. :(");
       }
+      /**
+       * getting the next location the user wants to move to and checks wether there
+       * is a Hole, is out of boundries or a Hat(winning) in it
+       * 
+       * @param {*} axisIndex 0 if we want to deal with x. 1 if we dealing with y
+       * @param {*} axisLetter 'x' or 'y' accordingly to th axis were workng with
+       * 
+       * @returns {*} Void
+       */
+      manageCases(axisIndex,axisLetter) {
+         //checking if not out of boundries
+         if(this.isOutOfBoundries(this.userLocation[axisIndex], axisLetter) == false){
+          this.loseGame();
+          
+        }
+        //checking if user hit a hole
+        if(this.isHole() == true){
+          this.loseGame();
+          
+        }
+      }
 
 
        /**
@@ -120,18 +142,8 @@ class Field {
         case 'w' :
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]--;
-
-            //checking if not out of boundries
-            if(this.isOutOfBoundries(this.userLocation[0], 'x') == false){
-              this.loseGame();
-              break;
-            }
-            //checking if user hit a hole
-            if(this.isHole() == true){
-              this.loseGame();
-              break;
-            }
-            
+            this.manageCases(0,'x');
+    
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
            
         break;
@@ -139,11 +151,9 @@ class Field {
         case 's':
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[0]++;
-            //checking if not out of boundies
-            if(this.isOutOfBoundries(this.userLocation[0], 'x') == false){
-              this.loseGame();
-              break;
-            }
+            this.manageCases(0,'x');
+
+            
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             
                         break;
@@ -152,25 +162,17 @@ class Field {
             console.log('this is a');
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]--;
-            //checking if not out of boundies
-            if(this.isOutOfBoundries(this.userLocation[1], 'y') == false){
-              this.loseGame();
-              break;
-            }
-            
+              this.manageCases(1,'y');
+          
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
-            console.log(this.userLocation[0] );
-            console.log(this.userLocation[1])  
+              
                      break;
 
         case 'd':
             this.arr[this.userLocation[0]][this.userLocation[1]] = fieldCharacter;
             this.userLocation[1]++;
-            //checking if not out of boundies
-            if(this.isOutOfBoundries(this.userLocation[1], 'y') == false){
-              this.loseGame();
-              break;
-            }
+              this.manageCases(1,'y');
+           
             this.arr[this.userLocation[0]][this.userLocation[1]] = pathCharacter;
             console.log(this.userLocation[0] );
             console.log(this.userLocation[1])
