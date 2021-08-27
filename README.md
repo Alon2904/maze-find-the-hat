@@ -13,5 +13,5 @@ Download the repository
 
 
 * How to run the program
-use "./main" to execute the program
+use "./main.js" to execute the program in the terminal
 
