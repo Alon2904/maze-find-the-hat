@@ -210,10 +210,10 @@ class Field {
   console.log('the hat and avoid holes or fall from the sides.')
 
   console.log('keys are:')
-  console.log('W - up');
-  console.log('S - down');
-  console.log('A - left');
-  console.log('D - right');
+  console.log('w - up');
+  console.log('s - down');
+  console.log('a - left');
+  console.log('d - right');
 
 
 
