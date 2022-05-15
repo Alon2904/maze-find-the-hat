@@ -1,19 +1,19 @@
 # Maze game - Find The Hat
 
-***Please make sure 'prompt-sync' is installed and if not intall it by 'npm install promp-sync'
+***Please make sure 'prompt-sync' is installed and if not intall it by '''npm install promp-sync'''
 
 Terminal game.
 6x6 matrix randomly generated with 
-'*' - As a player.
-'^' - The hat which the player want to get.
-'O' - Holes which if the player hits they lose.
-'░' - field objects represent the area the player con move to.
+'*' - As a player.<br />
+'^' - The hat which the player want to get.<br />
+'O' - Holes which if the player hits they lose.<br />
+'░' - field objects represent the area the player con move to.<br />
 
-The use has to send in the terminal each time one of the following letters to move the player:
-w - up
-s - down
-a - left
-d- right
+The use has to send in the terminal each time one of the following letters to move the player:<br />
+w - up<br />
+s - down<br />
+a - left<br />
+d- right<br />
 
 
 ## Description
