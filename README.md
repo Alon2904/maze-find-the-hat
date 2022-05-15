@@ -9,15 +9,17 @@ Terminal game.
 'O' - Holes which if the player hits they lose.<br />
 '░' - field objects represent the area the player con move to.<br />
 
-The use has to send in the terminal each time one of the following letters to move the player:<br />
+In order to play, the player will have to send in the terminal one of the following options:<br />
 w - up<br />
 s - down<br />
 a - left<br />
 d- right<br />
 
+The program will let you know if you went out of border/fell in the whole or catched the hat.
+
 
 ## Description
-The game is made with javascript.
+The game made with javascript.
 The game use the console to display itself and every user input there is a new console output that represent the new game status.
 
 
